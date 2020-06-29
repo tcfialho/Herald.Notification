@@ -4,6 +4,8 @@ using Amazon;
 using Amazon.Extensions.NETCore.Setup;
 using Amazon.SimpleNotificationService;
 
+using Herald.Notification.Sns.Attributes.Reader;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -11,7 +13,7 @@ namespace Herald.Notification.Sns.Configurations
 {
     public static class Configurations
     {
-        public static ISnsNotificationBuider AddNotificationSns(this IServiceCollection services, Action<NotificationSnsOptions> options)
+        public static ISnsNotificationBuider AddNotificationSns(this IServiceCollection services, Action<NotificationOptions> options)
         {
             if (services == null)
             {
@@ -24,10 +26,11 @@ namespace Herald.Notification.Sns.Configurations
             }
 
             services.Configure(options);
-            var messageQueueOptions = new NotificationSnsOptions();
+            var messageQueueOptions = new NotificationOptions();
             options?.Invoke(messageQueueOptions);
             services.TryAddSingleton(messageQueueOptions);
 
+            services.AddSingleton<INotificationAttributesReader, NotificationAttributesReader>();
             services.TryAddSingleton<INotification, NotificationSns>();
 
             var awsOptions = new AWSOptions();

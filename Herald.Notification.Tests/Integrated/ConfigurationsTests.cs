@@ -1,9 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 using Herald.Notification.Sns.Configurations;
 
 using Xunit;
@@ -22,6 +18,7 @@ namespace Herald.Notification.Tests.Integrated
             {
                 setup.ServiceURL = "localhost:4576";
                 setup.Region = "us-east-1";
+                setup.ClientId = "123456789012";
             });
 
             var serviceProvider = services.BuildServiceProvider();
