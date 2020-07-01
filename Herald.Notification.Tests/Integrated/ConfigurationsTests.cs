@@ -25,7 +25,7 @@ namespace Herald.Notification.Tests.Integrated
 
             var service = serviceProvider.GetService<INotification>();
 
-            Assert.IsType<NotificationSns>(service);
+            Assert.IsType<Sns.NotificationSns>(service);
         }
     }
 }

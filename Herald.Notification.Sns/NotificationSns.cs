@@ -19,7 +19,7 @@ namespace Herald.Notification.Sns
 
         public async Task Publish<T>(T message) where T : class
         {
-            await _sns.PublishAsync(_options.Arn, JsonConvert.SerializeObject(message));
+            await _sns.PublishAsync(_options.TopicArn, JsonConvert.SerializeObject(message));
         }
     }
 }
