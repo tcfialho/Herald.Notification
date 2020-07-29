@@ -2,6 +2,7 @@
 using Amazon.SimpleNotificationService.Model;
 
 using Herald.Notification.Sns;
+using Herald.Notification.Sns.Attributes.Reader;
 using Herald.Notification.Sns.Configurations;
 
 using Microsoft.Extensions.Options;
@@ -30,8 +31,14 @@ namespace Herald.Notification.Tests.Unit
             amazonSnsMock.Setup(x => x.PublishAsync(It.IsAny<string>(), It.IsAny<string>(), default))
                             .ReturnsAsync(publishAsyncReturns).Verifiable();
 
-            var notificationSns = new NotificationSns(amazonSnsMock.Object, Options.Create(options));
             var notification = new TestNotification { Message = Guid.NewGuid().ToString() };
+
+            var notificationAttributesReaderMock = new Mock<INotificationAttributesReader>();
+            notificationAttributesReaderMock.Setup(x => x.GetTopicName(It.IsAny<Type>()))
+                                            .Returns($"{nameof(TestNotification)}Topic");
+
+            var notificationSns = new NotificationSns(amazonSnsMock.Object, Options.Create(options), notificationAttributesReaderMock.Object);
+
 
             //Act
             await notificationSns.Publish(notification);

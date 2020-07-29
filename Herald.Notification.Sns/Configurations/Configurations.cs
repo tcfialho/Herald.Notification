@@ -1,13 +1,10 @@
-using System;
-
 using Amazon;
 using Amazon.Extensions.NETCore.Setup;
 using Amazon.SimpleNotificationService;
-
 using Herald.Notification.Sns.Attributes.Reader;
-
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using System;
 
 namespace Herald.Notification.Sns.Configurations
 {
