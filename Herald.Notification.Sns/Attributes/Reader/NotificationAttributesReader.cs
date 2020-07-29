@@ -6,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 
 namespace Herald.Notification.Sns.Attributes.Reader
 {
@@ -23,7 +22,7 @@ namespace Herald.Notification.Sns.Attributes.Reader
 
         public string GetTopicName(Type type)
         {
-            var configuredName = _configuration[string.Concat(nameof(NotificationOptions), ":", type.Name, "Topic")];
+            var configuredName = _configuration[$"{nameof(NotificationOptions)}:{type.Name}Topic"];
 
             if (!string.IsNullOrWhiteSpace(configuredName))
             {

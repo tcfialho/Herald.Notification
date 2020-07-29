@@ -6,6 +6,5 @@ namespace Herald.Notification.Sns.Configurations
         public string Region { get; set; }
         public string ClientId { get; set; }
         public string TopicNameSufix { get; set; } = "Topic";
-        public string TopicArn { get => $"arn:aws:sns:{Region}:{ClientId}".ToLower(); }
     }
 }

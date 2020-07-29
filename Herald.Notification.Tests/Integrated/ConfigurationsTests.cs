@@ -1,9 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-using Herald.Notification.Sns.Configurations;
-
+﻿using Herald.Notification.Sns.Configurations;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 using Xunit;
-using Herald.Notification.Sns;
 
 namespace Herald.Notification.Tests.Integrated
 {
@@ -13,6 +12,15 @@ namespace Herald.Notification.Tests.Integrated
         public void ShouldAddNotificationSns()
         {
             var services = new ServiceCollection();
+
+            var configuration = (IConfiguration)new ConfigurationBuilder()
+                .AddInMemoryCollection(new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("KEY", "VALUE"),
+                })
+                .Build();
+
+            services.AddSingleton(configuration);
 
             services.AddNotificationSns(setup =>
             {

@@ -1,9 +1,9 @@
 version: '2'
 services:
   localstack:
-    image: localstack/localstack:0.11.2
+    image: localstack/localstack:latest
     ports:
-      - '4576:4576'
+      - '4566:4566'
     environment:
       - SERVICES=sns
 
@@ -18,9 +18,9 @@ services:
     entrypoint: /bin/sh -c
     command: >
       "
-        while ! aws --endpoint-url=http://localstack:4576 sns list-topics > /dev/null; do echo waiting; sleep 5; done;
-        aws --endpoint-url=http://localstack:4576 sns create-topic --name TestNotificationTopic                
-        aws --endpoint-url=http://localstack:4576 sns list-topics
+        while ! aws --endpoint-url=http://localstack:4566 sns list-topics > /dev/null; do echo waiting; sleep 5; done;
+        aws --endpoint-url=http://localstack:4566 sns create-topic --name TestNotificationTopic                
+        aws --endpoint-url=http://localstack:4566 sns list-topics
         echo 'LOCALSTACK-SETUP-DONE!' 
       "
 

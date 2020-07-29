@@ -1,10 +1,8 @@
+using Herald.Notification.Sns.Attributes.Reader;
 using Herald.Notification.Sns.Configurations;
 using Microsoft.Extensions.Configuration;
 using Moq;
-using System;
-using System.Threading.Tasks;
 using Xunit;
-using Herald.Notification.Sns.Attributes.Reader;
 
 namespace Herald.Notification.Tests.Unit
 {
